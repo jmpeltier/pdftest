@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'pdftestapp';
-  pdfSrc: string = '/pdftest.pdf';
+  pdfSrc: string = 'assets/pdftest.pdf';
 }
