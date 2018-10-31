@@ -1,4 +1,35 @@
 <div>
-  <label>PDF src</label>
+  <label> {{pdfSrc}} has {{numPages}} Pages </label>
 </div>
-<pdf-viewer [src]="pdfSrc" [render-text]="true" style="display: block;"></pdf-viewer>
+<div>
+  Show All Pages <input type="checkbox" [checked]="showAllPages" (change)="showAllPages = !showAllPages"><br />
+  <br/><br/>
+  <span *ngIf="!showAllPages" style="font-size: 20px">
+    Current Page -> <input type="text" [(ngModel)]="currentPage">
+  </span>
+  <br/>
+  
+  
+</div>
+<div style="display:flex;">
+  <div *ngIf="!showAllPages">
+    <br/><br/><br/><br/><br/><br/>
+    <button (click)="decrementPage()" style="font-size: 20px">Decrement Current Page</button>
+  </div>
+  <div style="margin: 0 auto; width:800px;">
+    <pdf-viewer [src]="pdfSrc" [render-text]="true" style="display: block;" (after-load-complete)="afterLoadComplete($event)"
+    [show-all]="showAllPages" [(page)]="currentPage" [zoom]="1.0" [original-size]="false" [fit-to-page]="true" ></pdf-viewer>
+  </div>
+  <div *ngIf="!showAllPages">
+      <br/><br/><br/><br/><br/><br/>
+    <button (click)="incrementPage()" style="font-size: 20px">Increment Current Page</button>
+  </div>
+</div>
+
+<div>
+  <pre>
+    {{this.outline | json}}
+  </pre>
+</div>
+
+
